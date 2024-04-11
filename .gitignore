@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/sportsee/node_modules*
+/sportsee/.pnp
+/sportsee/.pnp.js
+
+# testing
+/sportsee/coverage
+
+# production
+/sportsee/build
+
+# misc
+/sportsee/.DS_Store
+/sportsee/.env.local
+/sportsee/.env.development.local
+/sportsee/.env.test.local
+/sportsee/.env.production.local
+
+/sportsee/npm-debug.log*
+/sportsee/yarn-debug.log*
+/sportsee/yarn-error.log*
