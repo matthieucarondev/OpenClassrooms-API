@@ -87,8 +87,7 @@ export default function ChartBar() {
     </Text>
     <BarChart
       width={835}
-      height={32git
-        0}
+      height={320}
       data={data}
       margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
       barGap={8}
