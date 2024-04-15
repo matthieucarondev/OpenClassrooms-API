@@ -7,7 +7,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+  Text
 } from "recharts";
 
 const USER_ACTIVITY = [
@@ -53,19 +53,42 @@ const USER_ACTIVITY = [
 ];
 
 
-export default function App() {
+export default function ChartBar() {
   // Créer un tableau de données avec des numéros séquentiels pour l'axe x
   const data = USER_ACTIVITY[0].sessions.map((session, index) => ({
     number: index + 1,
     kilogram: session.kilogram,
     calories: session.calories,
   }));
+  const CustomTooltipBar = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      const { kilogram, calories } = payload[0].payload;
+      return (
+        <div className="Barcustom-tooltip">
+          <p className="Bartext-tooltip">{kilogram} kg</p>
+          <p className="Bartext-tooltip">{calories} kcal</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
   // Trouver la valeur maximale des calories pour ajuster l'échelle de l'axe y
   const maxCalories = Math.max(...data.map((item) => item.calories));
   return (
+    <div >
+    <Text 
+      className="titreChartBar"
+      textAnchor="start"
+      verticalAnchor="start"
+      style={{ fontSize: "20px", fontWeight: "bold" }}
+    >
+     Activité quotidienne
+    </Text>
     <BarChart
-      width={800}
-      height={500}
+      width={835}
+      height={32git
+        0}
       data={data}
       margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
       barGap={8}
@@ -94,8 +117,7 @@ export default function App() {
         domain={[0, maxCalories]} // Définir le domaine de l'axe y pour les calories
         hide={true}
       />
-      <Tooltip />
-      <Legend />
+      <Tooltip  content={<CustomTooltipBar />} />
       <Bar radius={[20, 20, 0, 0]} maxBarSize={8} dataKey="kilogram" />
       <Bar
         radius={[20, 20, 0, 0]}
@@ -105,5 +127,6 @@ export default function App() {
         yAxisId="right" // Utiliser l'axe y de droite pour les calories
       />
     </BarChart>
+    </div>
   );
 };
