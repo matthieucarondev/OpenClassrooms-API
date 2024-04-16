@@ -1,4 +1,4 @@
-.ChartBar .lineChart .ChartRadar{
+.ChartBar .lineChart .ChartRadar {
     font-family: sans-serif;
     text-align: center;
 }
@@ -55,4 +55,63 @@
     line-height: 24px;
     color: white;
     font-weight: 500;
+}
+
+.infoNutri {
+   
+    display: flex;
+    flex-direction: column;
+    
+    /* Pour aligner les éléments horizontalement */
+   
+    margin: 20px;
+}
+
+.infoNutri figure {
+    width: 256px;
+    height: 124px;
+    background-color: #FBFBFB;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    /* Pour aligner les éléments horizontalement */
+    margin-bottom: 10px;
+    /* Espacement entre chaque figure */
+    justify-content: center;
+}
+
+.infoNutri figure img {
+    width: 60px;
+    /* Ajustez la largeur de l'image selon vos besoins */
+    height: auto;
+    /* Pour conserver les proportions de l'image */
+    margin-bottom: 5px;
+    /* Espacement entre l'image et les textes */
+}
+
+.infoNutri figure div {
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 10px;
+}
+
+.titreNutri {
+    height: 25px;
+    margin-top: 0px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Roboto;
+    line-height: 24px;
+    text-align: left;
+}
+
+.valeurNutri {
+    margin-bottom: 0px;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+
 }

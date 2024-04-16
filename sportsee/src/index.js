@@ -6,6 +6,7 @@ import ChartBar from './ChartBar';
 import LineChart from './LineChart';
 import ChartRadar from './ChartRadar';
 import TodayScore from './todayScore';
+import NutritionalCard from './NutritonalCard'
 import reportWebVitals from './reportWebVitals';
 
 
@@ -16,6 +17,7 @@ root.render(
     <LineChart/>
     <ChartRadar/>
     <TodayScore/>
+    <NutritionalCard/>
   </React.StrictMode>
 );
 
