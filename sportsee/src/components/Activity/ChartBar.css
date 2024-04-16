@@ -1,0 +1,39 @@
+.ChartBar {
+    font-family: sans-serif;
+    text-align: center;
+}
+.custom-tooltip {
+    background-color: white;
+    width: 39px;
+    height: 25px;
+}
+
+.text-tooltip {
+    font-size: 8px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.titreChartBar {
+    position: relative;
+    top: 69px;
+    left: 60px;
+}
+
+.Barcustom-tooltip {
+    background-color: red;
+    width: 39px;
+    height: 63px;
+    margin-left: 37px;
+}
+
+.Bartext-tooltip {
+    font-size: 7px;
+    text-align: center;
+    line-height: 24px;
+    color: white;
+    font-weight: 500;
+}
+.kcal{
+    margin-right: 15px;
+}

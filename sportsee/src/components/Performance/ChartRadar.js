@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./ChartRadar.css";
 import React from "react";
 import {
   Radar,

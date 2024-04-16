@@ -2,11 +2,11 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import ChartBar from './ChartBar';
-import LineChart from './LineChart';
-import ChartRadar from './ChartRadar';
-import TodayScore from './todayScore';
-import NutritionalCard from './NutritonalCard'
+import ChartBar from './components/Activity/ChartBar.js';
+import LineChart from './components/AverageSessions/LineChart.js';
+import ChartRadar from './components/Performance/ChartRadar.js';
+import TodayScore from './components/Score/todayScore.js';
+import NutritionalCard from './components/Card/NutritonalCard.js'
 import reportWebVitals from './reportWebVitals';
 
 

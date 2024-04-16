@@ -1,8 +1,9 @@
 import React from "react";
-import Lipide from "./asset/lipide.png";
-import Proteines from "./asset/protein.png";
-import Glucides from "./asset/glucide.png";
-import Calories from "./asset/calories.png";
+import "./NutritionalCard.css";
+import Lipide from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/lipide.png";
+import Proteines from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/protein.png";
+import Glucides from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/glucide.png";
+import Calories from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/calories.png";
 
 const USER_MAIN_DATA = [
   {

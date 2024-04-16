@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./ChartBar.css";
 import React from "react";
 import {
   BarChart,
@@ -7,7 +7,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Text
+  Text,
+  Legend
 } from "recharts";
 
 const USER_ACTIVITY = [
@@ -125,6 +126,16 @@ export default function ChartBar() {
         fill="red"
         yAxisId="right" // Utiliser l'axe y de droite pour les calories
       />
+       <Legend
+          align="right"
+          verticalAlign="top"
+          height={36}
+          iconType="circle"
+          payload={[
+            { value: <span style={{ color: "#74798C" }}>poids (kg)</span>, type: "circle", id: "kilogram" },
+            { value: <span class="kcal" style={{ color: "#74798C" }}>Calories brûlées (kCal)</span>, type: "circle", id: "calories", color: "red" },
+          ]}
+        />
     </BarChart>
     </div>
   );
