@@ -1,5 +1,5 @@
 import "@/components/Activity/Activity.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -10,57 +10,30 @@ import {
   Text,
   Legend
 } from "recharts";
+import { fetchActivityData } from "@/ApiServices/ApiServices.js";
+import { useParams } from "react-router-dom";
 
-const USER_ACTIVITY = [
-  {
-    sessions: [
-      {
-        day: "2020-07-01",
-        kilogram: 80,
-        calories: 240,
-      },
-      {
-        day: "2020-07-02",
-        kilogram: 80,
-        calories: 220,
-      },
-      {
-        day: "2020-07-03",
-        kilogram: 81,
-        calories: 280,
-      },
-      {
-        day: "2020-07-04",
-        kilogram: 81,
-        calories: 290,
-      },
-      {
-        day: "2020-07-05",
-        kilogram: 80,
-        calories: 160,
-      },
-      {
-        day: "2020-07-06",
-        kilogram: 78,
-        calories: 162,
-      },
-      {
-        day: "2020-07-07",
-        kilogram: 76,
-        calories: 390,
-      },
-    ],
-  },
-];
+
 
 
 export default function ChartBar() {
-  // Créer un tableau de données avec des numéros séquentiels pour l'axe x
-  const data = USER_ACTIVITY[0].sessions.map((session, index) => ({
-    number: index + 1,
-    kilogram: session.kilogram,
-    calories: session.calories,
-  }));
+  const  { userId }= useParams();
+  const [sessions, setSessions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       
+        const activityData = await fetchActivityData(userId);
+        
+        setSessions(activityData.sessions);
+      } catch (error) {
+        console.error("Error fetching activity data:", error);
+      }
+    };  
+    fetchData();
+  }, [userId]);
+
   const CustomTooltipBar = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const { kilogram, calories } = payload[0].payload;
@@ -74,6 +47,12 @@ export default function ChartBar() {
 
     return null;
   };
+
+  const data =  sessions ? sessions.map((session, index) => ({
+    number: index + 1,
+    kilogram: session.kilogram,
+    calories: session.calories,
+  })):[];
   // Trouver la valeur maximale des calories pour ajuster l'échelle de l'axe y
   const maxCalories = Math.max(...data.map((item) => item.calories));
   return (

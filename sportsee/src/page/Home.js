@@ -1,11 +1,11 @@
 import React from 'react';
 import ChartBar from "@/components/Activity/Activity.js";
-import LineChart from "@/components/AverageSessions/AverageSessions.js";
+import LineChartComponent from "@/components/AverageSessions/AverageSessions.js";
 import ChartRadar from "@/components/Performance/Performance.js";
 import TodayScore from "@/components/Score/Score.js";
 import NutritionalCard from "@/components/NutritionalCard/NutritonalCard.js";
 import LogoImg from "@/asset/logo.svg";
-import Profil from '../components/Profil/Profil';
+import Profil from '@/components/profil/Profil.js';
 
 const Home = () => {
     return (
@@ -16,7 +16,7 @@ const Home = () => {
       <article>
         <ChartBar />
         <aside class="asideChart">
-          <LineChart />
+          <LineChartComponent />
           <ChartRadar />
           <TodayScore />
         </aside>

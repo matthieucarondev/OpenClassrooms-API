@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
+import { fetchUserInfos } from '../../ApiServices/ApiServices';
+import { useParams } from 'react-router-dom';
 
 
 
 
 const TodayScore = () => {
+  const  { userId }= useParams();
   const [todayScore, setTodayScore] = useState(null);
 
   useEffect(() => {
-    const url = "http://localhost:3000/user/12";
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        // Mettre à jour l'état avec les données récupérées
-        setTodayScore(data.data.todayScore ); // Multiplication par 100 pour obtenir le pourcentage
-      })
-      .catch(error => {
+    const fetchUserData = async () => {
+      try {
+        const userInfos = await fetchUserInfos(userId);
+        if(userInfos) {
+          setTodayScore(parseFloat(userInfos.todayScore));
+        }
+      } catch (error) {
         console.error("Error fetching user data:", error);
-      });
-  }, []); // Exécute une seule fois après le montage du composant
+      }
+    };
+    fetchUserData();
+  }, [userId]); // Exécute une seule fois après le montage du composant
 
 
   return (

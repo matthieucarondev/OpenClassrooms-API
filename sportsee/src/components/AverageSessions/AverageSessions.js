@@ -1,49 +1,9 @@
 import "@/components/AverageSessions/AverageSessions.css";
-import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Rectangle,
-} from "recharts";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Rectangle } from "recharts";
+import { fetchAverageSessionsData } from "../../ApiServices/ApiServices.js";
 
-const USER_AVERAGE_SESSIONS = [
-  {
-    userId: 12,
-    sessions: [
-      {
-        day: 1,
-        sessionLength: 30,
-      },
-      {
-        day: 2,
-        sessionLength: 23,
-      },
-      {
-        day: 3,
-        sessionLength: 45,
-      },
-      {
-        day: 4,
-        sessionLength: 50,
-      },
-      {
-        day: 5,
-        sessionLength: 0,
-      },
-      {
-        day: 6,
-        sessionLength: 0,
-      },
-      {
-        day: 7,
-        sessionLength: 60,
-      },
-    ],
-  },
-];
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const sessionLength = payload[0].value;
@@ -57,7 +17,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 const CustomCursor = (props) => {
-  const { points} = props;
+  const { points } = props;
   const Height = 263;
   const Width = 258;
   const { x } = points[0];
@@ -75,59 +35,73 @@ const CustomCursor = (props) => {
     />
   );
 };
-export default function lineChart() {
-  const data = USER_AVERAGE_SESSIONS[0].sessions.map((session) => ({
+const LineChartComponent = () => {
+  const { userId } = useParams();
+  const [sessions, setSessions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const averageSessionsData = await fetchAverageSessionsData(userId);
+        setSessions(averageSessionsData.sessions);
+      } catch (error) {
+        console.error("Error fetching activity data:", error);
+      }
+    };
+    fetchData();
+  }, [userId]);
+
+  const data = sessions.map((session) => ({
     day: ["L", "M", "M", "J", "V", "S", "D"],
     sessionLength: session.sessionLength,
   }));
 
   return (
     <div className="lineGrapphique">
- 
-    <LineChart
-      width={258}
-      height={263}
-      data={data}
-      margin={{
-        top: 30,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-      animation={{ duration: 3500, easing: "ease-in-out" }}
-      style={{ background: "red",borderRadius: "10px"  }}
-    >  
-       <text
-       className="titreLineChart"
-      x={258 / 2}
-      y={15} // Position du titre sur le graphique
-      textAnchor="middle"
-      
-    >
-      Durée moyenne des sessions
-    </text>
-      <XAxis
-        dataKey="day"
-        domain={[-10, "dataMax"]}
-        axisLine={false}
-        tick={{ fill: "#FFFFFF" }}
-        tickLine={false}
-      />
-      <YAxis hide={true} domain={[-10, "auto"]} />
-      <Tooltip
-        cursor={<CustomCursor />}
-        content={<CustomTooltip />}
-        contentStyle={{ backgroundColor: "#FFFFFF", color: "#000000" }}
-      />
+      <LineChart
+        width={258}
+        height={263}
+        data={data}
+        margin={{
+          top: 30,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+        animation={{ duration: 3500, easing: "ease-in-out" }}
+        style={{ background: "red", borderRadius: "10px" }}
+      >
+        <text
+          className="titreLineChart"
+          x={258 / 2}
+          y={15} // Position du titre sur le graphique
+          textAnchor="middle"
+        >
+          Durée moyenne des sessions
+        </text>
+        <XAxis
+          dataKey="day"
+          domain={[-10, "dataMax"]}
+          axisLine={false}
+          tick={{ fill: "#FFFFFF" }}
+          tickLine={false}
+        />
+        <YAxis hide={true} domain={[-10, "auto"]} />
+        <Tooltip
+          cursor={<CustomCursor />}
+          content={<CustomTooltip />}
+          contentStyle={{ backgroundColor: "#FFFFFF", color: "#000000" }}
+        />
 
-      <Line
-        type="monotone"
-        dataKey="sessionLength"
-        fill="white"
-        stroke="white"
-        dot={false}
-      />
-    </LineChart>
+        <Line
+          type="monotone"
+          dataKey="sessionLength"
+          fill="white"
+          stroke="white"
+          dot={false}
+        />
+      </LineChart>
     </div>
   );
-}
+};
+export default LineChartComponent;

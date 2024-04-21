@@ -1,5 +1,6 @@
 import "@/components/Performance/Performance.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Radar,
   RadarChart,
@@ -7,52 +8,30 @@ import {
   PolarAngleAxis,
   
 } from "recharts";
+import { fetchPerformanceData } from "@/ApiServices/ApiServices.js";
 
-const USER_PERFORMANCE = [
-  {
-    userId: 12,
-    kind: {
-      1: "cardio",
-      2: "energy",
-      3: "endurance",
-      4: "strength",
-      5: "speed",
-      6: "intensity",
-    },
-    data: [
-      {
-        value: 80,
-        kind: 1,
-      },
-      {
-        value: 120,
-        kind: 2,
-      },
-      {
-        value: 140,
-        kind: 3,
-      },
-      {
-        value: 50,
-        kind: 4,
-      },
-      {
-        value: 200,
-        kind: 5,
-      },
-      {
-        value: 90,
-        kind: 6,
-      },
-    ],
-  },
-];
 
-export default function ChartRadar() {
-  const data = USER_PERFORMANCE[0].data.map((item) => ({
-    subject: USER_PERFORMANCE[0].kind[item.kind],
+
+const ChartRadar= ()=> {
+      const {userId} = useParams();
+      const [performeanceData, setPerformanceData] = useState(null);
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        const performeanceData= await fetchPerformanceData(userId);
+        setPerformanceData(performeanceData);
+        console.log(performeanceData.kind);
+  } catch (error) {
+    console.error("Error fetching activity data:", error);
+  }
+};  
+fetchData();
+  },[userId]);
+
+  const data =performeanceData ? performeanceData.data.map((item) => ({
+    subject: performeanceData.kind[item.kind],
     A: item.value,
-  }));
+  })):[];
   return (
     <div className="radar-chart-container">
       <RadarChart
@@ -80,3 +59,4 @@ export default function ChartRadar() {
     </div>
   );
 }
+export default  ChartRadar ;

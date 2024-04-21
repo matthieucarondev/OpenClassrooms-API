@@ -13,8 +13,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
-      <Route index element={<Home/>} />
-      <Route path="/user" element={<Home/>}/>
+      
+      <Route path="/user/:userId" element={<Home/>}/>
       <Route path="*" element={<Error/>}/>
    </Routes>
     </BrowserRouter>

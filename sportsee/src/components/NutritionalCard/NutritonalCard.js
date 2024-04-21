@@ -1,27 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "@/components/NutritionalCard/NutritionalCard.css";
 import Lipide from "@/asset/lipide.png";
 import Proteines from "@/asset/protein.png";
 import Glucides from "@/asset/glucide.png";
 import Calories from "@/asset/calories.png";
+import { fetchUserInfos } from "../../ApiServices/ApiServices";
+import { useParams } from 'react-router-dom';
 
-const USER_MAIN_DATA = [
-  {
-    id: 12,
-    userInfos: {
-      firstName: "Karl",
-      lastName: "Dovineau",
-      age: 31,
-    },
-    todayScore: 0.12,
-    keyData: {
-      calorieCount: 1930,
-      proteinCount: 155,
-      carbohydrateCount: 290,
-      lipidCount: 50,
-    },
-  },
-];
 
 const iconNutri = (name) => {
   switch (name) {
@@ -38,14 +23,32 @@ const iconNutri = (name) => {
   }
 };
 
-export default function NutritionalCard() {
-  const user = USER_MAIN_DATA[0];
+const NutritionalCard = () => {
+  const  { userId }= useParams();
+  const [userData,setUserData] = useState(null)
+   useEffect(() =>{
+    const fetchData = async() => {
+      try {
+        const userInfos = await fetchUserInfos(userId);
+        if(userInfos) {
+          setUserData(userInfos.keyData);
+    }
+  } catch (error) {
+    console.error("Error fetching user data" ,error);
+  }
+};
+fetchData();
+   },[userId]);
+
+   if(!userData){
+    return <div>Loading...</div>;
+   }
 
   const data = [
-    { name: "Calories", value: `${user.keyData.calorieCount} kcal` },
-    { name: "Proteines", value: `${user.keyData.proteinCount} g` },
-    { name: "Glucides", value: `${user.keyData.carbohydrateCount} g` },
-    { name: "Lipides", value: `${user.keyData.lipidCount} g`},
+    { name: "Calories", value: `${userData.calorieCount} kcal` },
+    { name: "Proteines", value: `${userData.proteinCount} g` },
+    { name: "Glucides", value: `${userData.carbohydrateCount} g` },
+    { name: "Lipides", value: `${userData.lipidCount} g`},
   ];
 
   return (
@@ -63,3 +66,4 @@ export default function NutritionalCard() {
     </div>
   );
 }
+export default NutritionalCard ;
