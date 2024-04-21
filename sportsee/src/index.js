@@ -1,23 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import ChartBar from './components/Activity/ChartBar.js';
-import LineChart from './components/AverageSessions/LineChart.js';
-import ChartRadar from './components/Performance/ChartRadar.js';
-import TodayScore from './components/Score/todayScore.js';
-import NutritionalCard from './components/Card/NutritonalCard.js'
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom/client";
+import "@/index.css";
 
+import reportWebVitals from "./reportWebVitals";
+import Home from "@/page/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Error from "@/page/Error";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ChartBar/>
-    <LineChart/>
-    <ChartRadar/>
-    <TodayScore/>
-    <NutritionalCard/>
+    <BrowserRouter>
+    <Routes>
+      <Route index element={<Home/>} />
+      <Route path="/user" element={<Home/>}/>
+      <Route path="*" element={<Error/>}/>
+   </Routes>
+    </BrowserRouter>
+    
   </React.StrictMode>
 );
 

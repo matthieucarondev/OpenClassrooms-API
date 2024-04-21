@@ -1,4 +1,4 @@
-import "./LineChart.css";
+import "@/components/AverageSessions/AverageSessions.css";
 import React from "react";
 import {
   LineChart,
@@ -7,7 +7,6 @@ import {
   YAxis,
   Tooltip,
   Rectangle,
-  Text
 } from "recharts";
 
 const USER_AVERAGE_SESSIONS = [
@@ -83,27 +82,30 @@ export default function lineChart() {
   }));
 
   return (
-    <div>
-      <Text 
-      className="titreLineChart"
-      textAnchor="start"
-      verticalAnchor="start"
-    >
-     Durée moyenne des sessions
-    </Text>
+    <div className="lineGrapphique">
+ 
     <LineChart
       width={258}
       height={263}
       data={data}
       margin={{
-        top: 5,
+        top: 30,
         right: 30,
         left: 20,
         bottom: 5,
       }}
       animation={{ duration: 3500, easing: "ease-in-out" }}
       style={{ background: "red",borderRadius: "10px"  }}
-    > 
+    >  
+       <text
+       className="titreLineChart"
+      x={258 / 2}
+      y={15} // Position du titre sur le graphique
+      textAnchor="middle"
+      
+    >
+      Durée moyenne des sessions
+    </text>
       <XAxis
         dataKey="day"
         domain={[-10, "dataMax"]}

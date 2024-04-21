@@ -1,20 +1,21 @@
 .infoNutri {
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .infoNutri figure {
     width: 256px;
     height: 124px;
     background-color: #FBFBFB;
+    border-radius: 10px;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     /* Pour aligner les éléments horizontalement */
-    margin-bottom: 10px;
-    /* Espacement entre chaque figure */
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .infoNutri figure img {

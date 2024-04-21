@@ -1,9 +1,9 @@
 import React from "react";
-import "./NutritionalCard.css";
-import Lipide from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/lipide.png";
-import Proteines from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/protein.png";
-import Glucides from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/glucide.png";
-import Calories from "/Users/Fujitsu/Documents/SportSee-Projet12-8_04_2024/sportsee/src/asset/calories.png";
+import "@/components/NutritionalCard/NutritionalCard.css";
+import Lipide from "@/asset/lipide.png";
+import Proteines from "@/asset/protein.png";
+import Glucides from "@/asset/glucide.png";
+import Calories from "@/asset/calories.png";
 
 const USER_MAIN_DATA = [
   {
@@ -53,8 +53,8 @@ export default function NutritionalCard() {
       {data.map((item, index) => (
         <figure key={index} >
           <div>
-            <h6 class="titreNutri">{item.name}</h6>
-            <h4 class="valeurNutri">{item.value}</h4>
+            <h6 className="titreNutri">{item.name}</h6>
+            <h4 className="valeurNutri">{item.value}</h4>
           </div>
           <figcaption></figcaption>
           <img src={iconNutri(item.name)} alt={item.name} />

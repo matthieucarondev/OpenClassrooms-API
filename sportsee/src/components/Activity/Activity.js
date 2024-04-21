@@ -1,4 +1,4 @@
-import "./ChartBar.css";
+import "@/components/Activity/Activity.css";
 import React from "react";
 import {
   BarChart,
@@ -77,20 +77,21 @@ export default function ChartBar() {
   // Trouver la valeur maximale des calories pour ajuster l'échelle de l'axe y
   const maxCalories = Math.max(...data.map((item) => item.calories));
   return (
-    <div >
+    <div className="BarGraphique" >
     <Text 
       className="titreChartBar"
       textAnchor="start"
       verticalAnchor="start"
-      style={{ fontSize: "20px", fontWeight: "bold" }}
+     
     >
      Activité quotidienne
     </Text>
     <BarChart
-      width={835}
+    style={{ background: "#FBFBFB",borderRadius: "10px"  }}
+      width={800}
       height={320}
       data={data}
-      margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
+      margin={{ top: 80, right: 28, bottom: 32, left: 28 }}
       barGap={8}
       barCategoryGap="20%"
     >
@@ -131,6 +132,7 @@ export default function ChartBar() {
           verticalAlign="top"
           height={36}
           iconType="circle"
+          top={47}
           payload={[
             { value: <span style={{ color: "#74798C" }}>poids (kg)</span>, type: "circle", id: "kilogram" },
             { value: <span class="kcal" style={{ color: "#74798C" }}>Calories brûlées (kCal)</span>, type: "circle", id: "calories", color: "red" },

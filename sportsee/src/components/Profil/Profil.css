@@ -1,0 +1,16 @@
+.titre-accueil {    
+    font-size:3em;
+    width:100%;
+   
+    font-weight: 500;
+}
+.firstname{
+    color:red;
+}
+.accueil {
+    margin-top:3em;
+    margin-left:15em;
+}
+.felicitation {
+    font-size:18px;
+}
