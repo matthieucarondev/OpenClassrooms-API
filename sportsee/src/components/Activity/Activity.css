@@ -20,10 +20,11 @@
 
 .titreChartBar {
     position: relative;
-    top: 69px;
+    top: 43px;
     left: 60px;
-    font-size: "15px";
-    font-weight: "500" ;
+    font-size: 15px;
+    font-weight: 500 ;
+    z-index: 1;
 }
 
 .Barcustom-tooltip {
@@ -43,4 +44,8 @@
 
 .kcal {
     margin-right: 15px;
+}
+.recharts-legend-wrapper{
+    top: 18px !important;
+
 }

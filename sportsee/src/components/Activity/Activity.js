@@ -61,7 +61,7 @@ export default function ChartBar() {
       className="titreChartBar"
       textAnchor="start"
       verticalAnchor="start"
-     
+
     >
      Activité quotidienne
     </Text>
@@ -87,6 +87,8 @@ export default function ChartBar() {
         axisLine={false}
         tickLine={false}
         allowDecimals={false}
+        
+       
       />
       <YAxis
         yAxisId="right"
@@ -107,6 +109,7 @@ export default function ChartBar() {
         yAxisId="right" // Utiliser l'axe y de droite pour les calories
       />
        <Legend
+       class="Legend"
           align="right"
           verticalAlign="top"
           height={36}

@@ -36,7 +36,7 @@ export const NavVertical = () => {
     <>
       <section class="NavActivity">
         <nav class="NavActivityNav">
-          <ul>
+          <ul >
             <li class="NavActivityLink">
               <img src={IconYoga} alt="" />
             </li>
