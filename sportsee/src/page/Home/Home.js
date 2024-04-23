@@ -4,12 +4,12 @@ import LineChartComponent from "@/components/AverageSessions/AverageSessions.js"
 import ChartRadar from "@/components/Performance/Performance.js";
 import TodayScore from "@/components/Score/Score.js";
 import NutritionalCard from "@/components/NutritionalCard/NutritonalCard.js";
+import LogoImg from "@/asset/logo.svg";
 import Profil from "@/components/profil/Profil.js";
 import { useParams } from "react-router-dom";
 import { fetchUserInfos } from "../ApiServices/ApiServices.js";
 import Error from "./Error/Error.js";
 import "./Home.css"
-
 
 
 
@@ -30,7 +30,7 @@ const Home = () => {
   }
   return (
     <div>
-      
+      <img alt="logo" src={LogoImg} />
       <section>
          <Profil />
         <article>
