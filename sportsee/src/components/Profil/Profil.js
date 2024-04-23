@@ -19,7 +19,7 @@ const Profil = () => {
         return <div>Loading...</div>;
     }
     return (
-        <div>
+        <div class="profil">
              <h1 class="titre-accueil">Bonjour <span className="firstname" >{userInfos.userInfos.firstName}</span></h1>
                     <p class="felicitation">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         </div>

@@ -12,25 +12,3 @@ code {
     monospace;
     
 }
-section{
-  display: flex;
-  
-}
-article {
-  display: flex;
-  flex-direction: column;
-}
-.asideChart{
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 835px;
-  margin-top: 20px;
-
-}
-.AsideInfo{
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  height: 100%;
-}

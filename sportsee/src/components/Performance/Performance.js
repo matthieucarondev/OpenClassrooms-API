@@ -20,7 +20,7 @@ const ChartRadar= ()=> {
       try {
         const performeanceData= await fetchPerformanceData(userId);
         setPerformanceData(performeanceData);
-        console.log(performeanceData.kind);
+        
   } catch (error) {
     console.error("Error fetching activity data:", error);
   }

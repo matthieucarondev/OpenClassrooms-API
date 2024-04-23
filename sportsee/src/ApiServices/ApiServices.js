@@ -21,7 +21,6 @@ export const fetchActivityData = async (userId) => {
       }
       const data = await  response.json();  
       return data.data; 
-   
     } catch (error) {
       console.error("Error fetching activity data:", error);
       return [];
@@ -35,7 +34,6 @@ export const fetchActivityData = async (userId) => {
         throw new Error("Failed to fetch activity data");
       }
       const data = await  response.json();  
-      console.log(data.data);
       return data.data; 
   
     } catch (error) {
@@ -52,7 +50,6 @@ export const fetchActivityData = async (userId) => {
         throw new Error("Failed to fetch activity data");
       }
       const data = await  response.json();  
-      console.log(data);
       return data.data; 
   
     } catch (error) {
