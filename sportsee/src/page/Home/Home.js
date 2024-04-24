@@ -4,51 +4,48 @@ import LineChartComponent from "@/components/AverageSessions/AverageSessions.js"
 import ChartRadar from "@/components/Performance/Performance.js";
 import TodayScore from "@/components/Score/Score.js";
 import NutritionalCard from "@/components/NutritionalCard/NutritonalCard.js";
-import LogoImg from "@/asset/logo.svg";
 import Profil from "@/components/profil/Profil.js";
 import { useParams } from "react-router-dom";
-import { fetchUserInfos } from "../ApiServices/ApiServices.js";
-import Error from "./Error/Error.js";
-import "./Home.css"
-
-
-
+import { fetchUserInfos } from "../../ApiServices/ApiServices.js";
+import Error from "../Error/Error.js";
+import "./Home.css";
+import Loading from "../../components/Loading/Loading.js";
 
 const Home = () => {
   const [userInfos, setUserInfos] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const { userId } = useParams();
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
-      const userInfo = await fetchUserInfos(userId); // Utilisez la fonction fetchUserInfos pour récupérer les données de l'utilisateur
+      const userInfo = await fetchUserInfos(userId);
       setUserInfos(userInfo);
+      setLoading(false);
     };
     fetchData();
   }, [userId]);
-
-  if (!userInfos) {
-    return <Error />;
-  }
   return (
     <div>
-      <img alt="logo" src={LogoImg} />
-      <section>
-         <Profil />
-        <article>
-          <aside>
-            <ChartBar />
-            <div className="asideChart">
-              <LineChartComponent />
-              <ChartRadar />
-              <TodayScore />
-            </div>
-           </aside>
+      {isLoading && <Loading />}
+      {!isLoading && !userInfos && <Error />}
+      {userInfos && (
+        <section>
+          <Profil />
+          <article>
+            <aside>
+              <ChartBar />
+              <div className="asideChart">
+                <LineChartComponent />
+                <ChartRadar />
+                <TodayScore />
+              </div>
+            </aside>
             <div className="AsideInfo">
               <NutritionalCard />
             </div>
-        
-          
-        </article>
-      </section>
+          </article>
+        </section>
+      )}
     </div>
   );
 };

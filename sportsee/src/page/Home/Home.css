@@ -1,7 +1,8 @@
 section{
     display: flex;
     flex-direction: column;
-    margin-left: 241px;
+    margin-left: 250px;
+
   }
 
   article {
