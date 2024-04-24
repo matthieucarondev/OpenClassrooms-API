@@ -36,13 +36,13 @@ const Home = () => {
         <article>
           <aside>
             <ChartBar />
-            <div class="asideChart">
+            <div className="asideChart">
               <LineChartComponent />
               <ChartRadar />
               <TodayScore />
             </div>
            </aside>
-            <div class="AsideInfo">
+            <div className="AsideInfo">
               <NutritionalCard />
             </div>
         

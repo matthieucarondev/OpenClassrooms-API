@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./Profil.css"
 import { fetchUserInfos } from '../../ApiServices/ApiServices';
 import { useParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 const Profil = () => {
     const [userInfos, setUserInfos] = useState(null);
@@ -16,12 +17,12 @@ const Profil = () => {
         }, [userId]);
 
     if (!userInfos) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     return (
-        <div class="profil">
-             <h1 class="titre-accueil">Bonjour <span className="firstname" >{userInfos.userInfos.firstName}</span></h1>
-                    <p class="felicitation">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+        <div className="profil">
+             <h1 className="titre-accueil">Bonjour <span className="firstname" >{userInfos.userInfos.firstName}</span></h1>
+                    <p className="felicitation">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         </div>
     );
 };

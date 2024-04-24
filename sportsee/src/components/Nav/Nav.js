@@ -34,24 +34,24 @@ export const NavHorizontal = () => {
 export const NavVertical = () => {
   return (
     <>
-      <section class="NavActivity">
-        <nav class="NavActivityNav">
+      <section className="NavActivity">
+        <nav className="NavActivityNav">
           <ul >
-            <li class="NavActivityLink">
+            <li className="NavActivityLink">
               <img src={IconYoga} alt="" />
             </li>
-            <li class="NavActivityLink">
+            <li className="NavActivityLink">
               <img src={IconSwimming} alt="" />
             </li>
-            <li class="NavActivityLink">
+            <li className="NavActivityLink">
               <img src={IconCycling} alt="" />
             </li>
-            <li class="NavActivityLink">
+            <li className="NavActivityLink">
               <img src={IconBodybuilding} alt="" />
             </li>
           </ul>
         </nav>
-        <p class="NavActivityText">Copiryght, SportSee 2020</p>
+        <p className="NavActivityText">Copyright, SportSee 2024</p>
       </section>
     </>
   );

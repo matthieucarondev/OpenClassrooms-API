@@ -109,7 +109,7 @@ export default function ChartBar() {
         yAxisId="right" // Utiliser l'axe y de droite pour les calories
       />
        <Legend
-       class="Legend"
+       className="Legend"
           align="right"
           verticalAlign="top"
           height={36}
@@ -117,7 +117,7 @@ export default function ChartBar() {
           top={47}
           payload={[
             { value: <span style={{ color: "#74798C" }}>poids (kg)</span>, type: "circle", id: "kilogram" },
-            { value: <span class="kcal" style={{ color: "#74798C" }}>Calories brûlées (kCal)</span>, type: "circle", id: "calories", color: "red" },
+            { value: <span className="kcal" style={{ color: "#74798C" }}>Calories brûlées (kCal)</span>, type: "circle", id: "calories", color: "red" },
           ]}
         />
     </BarChart>
