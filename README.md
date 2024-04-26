@@ -44,7 +44,7 @@ En se plaçant dans ce repo du _front-end_, installer ses dépendances :
 
 Lancer le _front-end_ sur le port 3001 :
 
-`npm starto`
+`npm run starto`
 
 Le _front-end_ est alors consultable à l'URL `http://localhost:3001`.
 
@@ -87,7 +87,7 @@ Inside this front-end repository, install dependencies:
 
 Launch front-end on port 3001:
 
-`npm starto`
+`npm run starto`
 
 Front-end is now rendered at URL `http://localhost:3001`.
 
