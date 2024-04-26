@@ -1,5 +1,4 @@
-
-![logo-du-projet]![alt text](image.png)
+![alt text](image-1.png)
 # SportSee - Avril 2024
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bc73e681d0ed4af7a521258d88236e8e)](https://www.codacy.com/gh/logic-fabric/sportsee/dashboard?utm_source=github.com&utm_medium=referral&utm_content=logic-fabric/sportsee&utm_campaign=Badge_Grade)
