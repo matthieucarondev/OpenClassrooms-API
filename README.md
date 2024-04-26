@@ -5,6 +5,9 @@
 
 Code source du **Projet 12** - **_Développez un tableau de bord d'analytics avec React_** du parcours **Développeur Front-end** d'_OpenClassrooms_.
 
+## Author 
+
+-Matthieu CARON
 
 ## Installation (_english below_)
 
