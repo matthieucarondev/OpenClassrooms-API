@@ -1,6 +1,5 @@
 
-![logo-du-projet](https://www.figma.com/file/BMomGVZqLZb811mDMShpLu/UI-design-Sportify-FR?type=design&node-id=1-2&mode=design&t=deYBHCZF7rWEo2Hr-4)
-
+![logo-du-projet]![alt text](image.png)
 # SportSee - Avril 2024
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bc73e681d0ed4af7a521258d88236e8e)](https://www.codacy.com/gh/logic-fabric/sportsee/dashboard?utm_source=github.com&utm_medium=referral&utm_content=logic-fabric/sportsee&utm_campaign=Badge_Grade)
