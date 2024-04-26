@@ -1,0 +1,26 @@
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Appliquez l'animation à votre logo lorsque la classe "rotating" est présente */
+  .loadingLogo.rotating {
+    animation: rotate 2s linear infinite;
+    position: relative;
+    width: 80px;
+  }
+  .Loading{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .Loading-text{ 
+    font-size: 50px !important;
+    margin: 0%;
+  }

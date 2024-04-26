@@ -1,12 +1,14 @@
 .profil{
     margin-left: 20px;
-    height: 168px;
+    height: 143px;
 }
 .titre-accueil {    
     font-size:3em;
     width:100%;
    margin-bottom: 0;
     font-weight: 500;
+    margin-top: 5px;
+
 }
 .firstname{
     color:red;

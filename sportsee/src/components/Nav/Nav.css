@@ -1,7 +1,8 @@
 .NavHorizontal{
     background-color: rgb(0, 0, 0);
     display: flex;
-    width: 100%;
+    width: 99%;
+    min-width: 1259px;
     box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
     padding: 1rem 0 0 1rem;
     top:0;
@@ -17,7 +18,7 @@
     width: 65%;
     flex-direction: row;
     justify-content: space-around;
-    margin-left: 6%;
+    
 }
 .NavLink{
     text-decoration: none;
@@ -35,8 +36,9 @@
     background-color: rgb(0, 0, 0);
     width: 117px;
     position:absolute;
-    top: 0;
-    height: 100%;
+    top: 92px;
+    height: 90vh;
+    min-height: 780px;
     z-index: -1;
  
 }
@@ -59,6 +61,6 @@
     color:rgb(255, 255, 255);
     transform: rotate(-90deg);
     width: 12rem;
-    margin: 15rem 0 0 -2rem;
+    margin: 7rem 0 0 -2rem;
     font-size: 12px;
 }

@@ -16,11 +16,14 @@ const Home = () => {
   const [isLoading, setLoading] = useState(true);
   const { userId } = useParams();
   useEffect(() => {
-    setLoading(true);
+    
     const fetchData = async () => {
+      setTimeout(async () => {
+      setLoading(true);
       const userInfo = await fetchUserInfos(userId);
       setUserInfos(userInfo);
       setLoading(false);
+    }, 3000);
     };
     fetchData();
   }, [userId]);

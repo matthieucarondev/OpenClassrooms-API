@@ -13,9 +13,10 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    /* Pour aligner les éléments horizontalement */
     justify-content: center;
     margin-bottom: 20px;
+    margin-left: 0;
+
 }
 
 .infoNutri figure img {
