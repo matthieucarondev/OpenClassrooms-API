@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import { fetchActivityData } from "@/ApiServices/ApiServices.js";
 import { useParams } from "react-router-dom";
+import { Loadingchart } from "../Loading/Loading";
+import { USER_ACTIVITY } from "../../dataMock/Data";
 
 
 
@@ -22,18 +24,37 @@ export default function ChartBar() {
 
   useEffect(() => {
     const fetchData = async () => {
+       // Vérifie d'abord l'API
+      let activityData; 
       try {
-       
-        const activityData = await fetchActivityData(userId);
-        
-        setSessions(activityData.sessions);
+        activityData = await fetchActivityData(userId);
       } catch (error) {
-        console.error("Error fetching activity data:", error);
+        console.error("Error fetching activity data from API:", error);
+      }
+        if ( activityData  && activityData.sessions){
+          setSessions(activityData.sessions);
+        }else{
+             // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
+        const userData = USER_ACTIVITY.find((user) => user.userId === parseInt(userId));
+        if (userData) {
+          setSessions(userData.sessions);
+        } else {
+          console.error("No mock data found for user:", userId);
+        }
       }
     };  
     fetchData();
-  }, [userId]);
+  }, [userId]);  
 
+   if(!sessions){
+    const userData = USER_ACTIVITY.find((user) => user.userId === parseInt(userId));
+  if (userData) {
+    return <Loadingchart />;
+  } else {
+    console.error("No mock data found for user:", userId);
+    return null;
+  }
+}
   const CustomTooltipBar = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const { kilogram, calories } = payload[0].payload;

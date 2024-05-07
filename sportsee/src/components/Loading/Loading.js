@@ -6,7 +6,7 @@ import "./Loading.css"
 
 
 
-const Loading = () => {
+export const Loading = () => {
     return (
         <div className='Loading'>
              <img src={logo} alt="logo SportSee" className="loadingLogo rotating" />
@@ -15,4 +15,8 @@ const Loading = () => {
     );
 };
 
-export default Loading;
+export const Loadingchart = () => {
+    return (
+        <div className='logo'><img src={logo} alt="logo SportSee" className=" rotating2" />Loading...</div>
+);
+};

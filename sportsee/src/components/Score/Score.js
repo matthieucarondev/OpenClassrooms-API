@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
-import { fetchUserInfos } from '../../ApiServices/ApiServices';
+import { fetchUserInfos } from '@/ApiServices/ApiServices';
 import { useParams } from 'react-router-dom';
-
-
+import { Loadingchart } from '@/components/Loading/Loading';
+import { USER_MAIN_DATA } from "@/dataMock/Data.js";
 
 
 const TodayScore = () => {
@@ -12,19 +12,28 @@ const TodayScore = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
+      // Vérifie d'abord l'API
+      let score ;
         const userInfos = await fetchUserInfos(userId);
         if(userInfos) {
-          setTodayScore(parseFloat(userInfos.todayScore));
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+          score = parseFloat(userInfos.todayScore);
+        }else {
+             // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
+        const mockUserData = USER_MAIN_DATA.find(
+          (data) => data.id.toString() === userId.toString()
+        );
+        if (mockUserData) {
+          score = parseFloat(mockUserData.todayScore);
+        } 
       }
-    };
+      setTodayScore(score);
+      };
     fetchUserData();
   }, [userId]); // Exécute une seule fois après le montage du composant
 
-
+  if (!todayScore) {
+    return <Loadingchart />;
+}
   return (
     <ResponsiveContainer width={258} height={263}>
       <RadialBarChart

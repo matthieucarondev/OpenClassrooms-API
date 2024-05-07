@@ -6,10 +6,10 @@ import TodayScore from "@/components/Score/Score.js";
 import NutritionalCard from "@/components/NutritionalCard/NutritonalCard.js";
 import Profil from "@/components/profil/Profil.js";
 import { useParams } from "react-router-dom";
-import { fetchUserInfos } from "../../ApiServices/ApiServices.js";
-import Error from "../Error/Error.js";
+import { fetchUserInfos } from "@/ApiServices/ApiServices.js";
+import Error from "@/page/Error/Error.js";
 import "./Home.css";
-import Loading from "../../components/Loading/Loading.js";
+import {Loading} from "@/components/Loading/Loading.js";
 
 const Home = () => {
   const [userInfos, setUserInfos] = useState(null);
@@ -44,7 +44,7 @@ const Home = () => {
               </div>
             </aside>
             <div className="AsideInfo">
-              <NutritionalCard />
+              <NutritionalCard  />
             </div>
           </article>
         </section>

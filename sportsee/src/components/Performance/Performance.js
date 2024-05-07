@@ -9,6 +9,8 @@ import {
   
 } from "recharts";
 import { fetchPerformanceData } from "@/ApiServices/ApiServices.js";
+import { Loadingchart } from '@/components/Loading/Loading';
+import { USER_PERFORMANCE } from "@/dataMock/Data";
 
 
 
@@ -18,16 +20,22 @@ const ChartRadar= ()=> {
   useEffect(()=>{
     const fetchData = async () => {
       try {
+         // Vérifie d'abord l'API
         const performeanceData= await fetchPerformanceData(userId);
         setPerformanceData(performeanceData);
-        
-  } catch (error) {
-    console.error("Error fetching activity data:", error);
+  } catch {
+       // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
+    const mockData = USER_PERFORMANCE.find(item => item.userId === parseInt(userId));
+        if (mockData) {
+          setPerformanceData(mockData);
+        } 
   }
 };  
 fetchData();
   },[userId]);
-
+  if(!performeanceData){
+    return <Loadingchart />;
+   }
   const data =performeanceData ? performeanceData.data.map((item) => ({
     subject: performeanceData.kind[item.kind],
     A: item.value,

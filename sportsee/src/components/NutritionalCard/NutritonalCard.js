@@ -6,6 +6,8 @@ import Glucides from "@/asset/glucide.png";
 import Calories from "@/asset/calories.png";
 import { fetchUserInfos } from "../../ApiServices/ApiServices";
 import { useParams } from 'react-router-dom';
+import { Loadingchart } from '@/components/Loading/Loading';
+import { USER_MAIN_DATA } from "../../dataMock/Data";
 
 
 const iconNutri = (name) => {
@@ -32,16 +34,28 @@ const NutritionalCard = () => {
         const userInfos = await fetchUserInfos(userId);
         if(userInfos) {
           setUserData(userInfos.keyData);
+    }else {
+      // Si les données de l'API ne sont pas disponibles, utilisez les données mock
+      const mockUserData = USER_MAIN_DATA.find(data => data.id.toString() === userId);
+      if (mockUserData) {
+        setUserData(mockUserData.keyData);
+      }
     }
+
   } catch (error) {
     console.error("Error fetching user data" ,error);
+    // En cas d'erreur lors de la récupération des données de l'API, utilisez les données mock
+    const mockUserData = USER_MAIN_DATA.find(data => data.id.toString() === userId);
+    if (mockUserData) {
+      setUserData(mockUserData.keyData);
   }
+}
 };
 fetchData();
    },[userId]);
 
    if(!userData){
-    return <div>Loading...</div>;
+    return <Loadingchart />;
    }
 
   const data = [
