@@ -1,11 +1,9 @@
 import React from "react";
-
 import ReactDOM from "react-dom/client";
-import "@/index.css";
-
-import reportWebVitals from "./reportWebVitals";
-import Home from "@/page/Home/Home.js";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
+import "@/index.css";
+import Home from "@/page/Home/Home.js";
 import Error from "@/page/Error/Error.js";
 import { NavHorizontal, NavVertical } from "@/components/Nav/Nav.js";
 

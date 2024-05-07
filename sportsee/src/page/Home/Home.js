@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./Home.css";
 import ChartBar from "@/components/Activity/Activity.js";
 import LineChartComponent from "@/components/AverageSessions/AverageSessions.js";
 import ChartRadar from "@/components/Performance/Performance.js";
 import TodayScore from "@/components/Score/Score.js";
 import NutritionalCard from "@/components/NutritionalCard/NutritonalCard.js";
 import Profil from "@/components/profil/Profil.js";
-import { useParams } from "react-router-dom";
 import { fetchUserInfos } from "@/ApiServices/ApiServices.js";
 import Error from "@/page/Error/Error.js";
-import "./Home.css";
 import { Loading } from "@/components/Loading/Loading.js";
 
 const Home = () => {
@@ -16,7 +16,6 @@ const Home = () => {
   const [isLoading, setLoading] = useState(true);
   const { userId } = useParams();
   useEffect(() => {
-
     const fetchData = async () => {
       setTimeout(async () => {
         setLoading(true);

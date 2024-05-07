@@ -5,7 +5,7 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from "recharts";
 import { fetchPerformanceData } from "@/ApiServices/ApiServices.js";
 import { Loadingchart } from "@/components/Loading/Loading";
 import { USER_PERFORMANCE } from "@/dataMock/Data";
-import PerformanceModel from "../../model/PerformanceModel";
+import PerformanceModel from "@/model/PerformanceModel";
 
 const ChartRadar = () => {
   const { userId } = useParams();
@@ -38,7 +38,7 @@ const ChartRadar = () => {
     subject: item.kind,
     A: item.value,
   }));
-  
+
   return (
     <div className="radar-chart-container">
       <RadarChart
