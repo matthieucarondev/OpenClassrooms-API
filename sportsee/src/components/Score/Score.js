@@ -1,44 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
-import { fetchUserInfos } from '@/ApiServices/ApiServices';
-import { useParams } from 'react-router-dom';
-import { Loadingchart } from '@/components/Loading/Loading';
+import { fetchUserInfos } from "@/ApiServices/ApiServices";
+import { useParams } from "react-router-dom";
+import { Loadingchart } from "@/components/Loading/Loading";
 import { USER_MAIN_DATA } from "@/dataMock/Data.js";
-import UserModel from '../../model/UserModel';
-
+import UserModel from "@/model/UserModel";
 
 const TodayScore = () => {
-  const  { userId }= useParams();
+  const { userId } = useParams();
   const [todayScore, setTodayScore] = useState(null);
-  const [userModel, setUserModel] = useState(null); // État pour stocker l'instance UserModel
 
   useEffect(() => {
     const fetchUserData = async () => {
       // Vérifie d'abord l'API
-      let score ;
+      try {
         const userInfos = await fetchUserInfos(userId);
-        if(userInfos) {
-          const newUserModel = new UserModel(userId);
-          await newUserModel.initialize(userInfos);
-          setUserModel(newUserModel);
-          score = parseFloat(userInfos.todayScore);
-        }else {
-             // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
+        const newUserModel = new UserModel(userId);
+        await newUserModel.initialize(userInfos);
+        setTodayScore(parseFloat(userInfos.todayScore));
+      } catch (error) {
+        console.error("Error fetching user data", error);
+        // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
         const mockUserData = USER_MAIN_DATA.find(
           (data) => data.id.toString() === userId.toString()
         );
         if (mockUserData) {
-          score = parseFloat(mockUserData.todayScore);
-        } 
+          todayScore(parseFloat(mockUserData.todayScore));
+        }
       }
-      setTodayScore(score);
-      };
+    };
     fetchUserData();
-  }, [userId]); // Exécute une seule fois après le montage du composant
+  }, [todayScore, userId]); // Exécute une seule fois après le montage du composant
 
   if (!todayScore) {
     return <Loadingchart />;
-}
+  }
   return (
     <ResponsiveContainer width={258} height={263}>
       <RadialBarChart
@@ -75,7 +71,12 @@ const TodayScore = () => {
         >
           Score
         </text>
-        <RadialBar fill="red"  minWidth={15} dataKey="todayScore"  cornerRadius="50%" />
+        <RadialBar
+          fill="red"
+          minWidth={15}
+          dataKey="todayScore"
+          cornerRadius="50%"
+        />
         <div className="centralChart"></div>
         <text
           x="50%"
@@ -87,7 +88,7 @@ const TodayScore = () => {
           dominantBaseline="middle"
           fontSize="26"
         >
-          {todayScore*100}%
+          {todayScore * 100}%
         </text>
         <text
           x="50%"
@@ -99,11 +100,15 @@ const TodayScore = () => {
           dominantBaseline="middle"
           fontSize="16"
         >
-          <tspan x="50%" dy="1.2em">de votre</tspan>
-          <tspan x="50%" dy="1.2em">objectif</tspan>
+          <tspan x="50%" dy="1.2em">
+            de votre
+          </tspan>
+          <tspan x="50%" dy="1.2em">
+            objectif
+          </tspan>
         </text>
       </RadialBarChart>
     </ResponsiveContainer>
   );
-}
+};
 export default TodayScore;

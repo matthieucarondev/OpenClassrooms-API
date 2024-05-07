@@ -9,21 +9,21 @@ import { useParams } from "react-router-dom";
 import { fetchUserInfos } from "@/ApiServices/ApiServices.js";
 import Error from "@/page/Error/Error.js";
 import "./Home.css";
-import {Loading} from "@/components/Loading/Loading.js";
+import { Loading } from "@/components/Loading/Loading.js";
 
 const Home = () => {
   const [userInfos, setUserInfos] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { userId } = useParams();
   useEffect(() => {
-    
+
     const fetchData = async () => {
       setTimeout(async () => {
-      setLoading(true);
-      const userInfo = await fetchUserInfos(userId);
-      setUserInfos(userInfo);
-      setLoading(false);
-    }, 3000);
+        setLoading(true);
+        const userInfo = await fetchUserInfos(userId);
+        setUserInfos(userInfo);
+        setLoading(false);
+      }, 3000);
     };
     fetchData();
   }, [userId]);
@@ -44,7 +44,7 @@ const Home = () => {
               </div>
             </aside>
             <div className="AsideInfo">
-              <NutritionalCard  />
+              <NutritionalCard />
             </div>
           </article>
         </section>

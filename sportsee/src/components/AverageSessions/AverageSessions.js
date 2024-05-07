@@ -7,13 +7,12 @@ import { USER_AVERAGE_SESSIONS } from "@/dataMock/Data";
 import AverageModel from "@/model/AverageModel";
 import { useParams } from "react-router-dom";
 
-
 function withParams(Component) {
   return function WrappedComponent(props) {
     const params = useParams();
 
-  return <Component {...props} params={params} />;
-};
+    return <Component {...props} params={params} />;
+  };
 }
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -46,8 +45,8 @@ const CustomCursor = (props) => {
     />
   );
 };
-class LineChartComponent extends Component  {
-  constructor(props){
+class LineChartComponent extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       sessions: [],
@@ -56,83 +55,85 @@ class LineChartComponent extends Component  {
     this.averageModel = new AverageModel();
     console.log("AverageModel instance:", this.averageModel);
   }
-    
-  async componentDidMount() {
-    
-    const userId =  this.props.params.userId;
-      try {
-        // Vérifie d'abord l'API
-        const averageSessionsData = await fetchAverageSessionsData(userId);
 
-        this.setState({ sessions: averageSessionsData.sessions, isLoading: false });
-      } catch {
-        // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
-        const userData = USER_AVERAGE_SESSIONS.find(
-          (user) => user.userId === parseInt(userId)
-        );
-        if (userData) {
-          this.setState({ sessions: userData.sessions, isLoading: false });
-        }
+  async componentDidMount() {
+    const userId = this.props.params.userId;
+    try {
+      // Vérifie d'abord l'API
+      const averageSessionsData = await fetchAverageSessionsData(userId);
+
+      this.setState({
+        sessions: averageSessionsData.sessions,
+        isLoading: false,
+      });
+    } catch {
+      // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
+      const userData = USER_AVERAGE_SESSIONS.find(
+        (user) => user.userId === parseInt(userId)
+      );
+      if (userData) {
+        this.setState({ sessions: userData.sessions, isLoading: false });
       }
     }
-render() {
-  const { sessions, isLoading } = this.state;
-  if (isLoading || !sessions || sessions.length === 0) {
-    return <Loadingchart />;
   }
+  render() {
+    const { sessions, isLoading } = this.state;
+    if (isLoading || !sessions || sessions.length === 0) {
+      return <Loadingchart />;
+    }
 
-  const data = sessions.map((session) => ({
-    day: ["L", "M", "M", "J", "V", "S", "D"],
-    sessionLength: session.sessionLength,
-  }));
+    const data = sessions.map((session) => ({
+      day: ["L", "M", "M", "J", "V", "S", "D"],
+      sessionLength: session.sessionLength,
+    }));
 
-  return (
-    <div className="lineGrapphique">
-      <LineChart
-        width={258}
-        height={263}
-        data={data}
-        margin={{
-          top: 30,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-        animation={{ duration: 3500, easing: "ease-in-out" }}
-        style={{ background: "red", borderRadius: "10px" }}
-      >
-        <text
-          className="titreLineChart"
-          x={258 / 2}
-          y={15} // Position du titre sur le graphique
-          textAnchor="middle"
+    return (
+      <div className="lineGrapphique">
+        <LineChart
+          width={258}
+          height={263}
+          data={data}
+          margin={{
+            top: 30,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+          animation={{ duration: 3500, easing: "ease-in-out" }}
+          style={{ background: "red", borderRadius: "10px" }}
         >
-          Durée moyenne des sessions
-        </text>
-        <XAxis
-          dataKey="day"
-          domain={[-10, "dataMax"]}
-          axisLine={false}
-          tick={{ fill: "#FFFFFF" }}
-          tickLine={false}
-        />
-        <YAxis hide={true} domain={[-10, "auto"]} />
-        <Tooltip
-          cursor={<CustomCursor />}
-          content={<CustomTooltip />}
-          contentStyle={{ backgroundColor: "#FFFFFF", color: "#000000" }}
-        />
+          <text
+            className="titreLineChart"
+            x={258 / 2}
+            y={15} // Position du titre sur le graphique
+            textAnchor="middle"
+          >
+            Durée moyenne des sessions
+          </text>
+          <XAxis
+            dataKey="day"
+            domain={[-10, "dataMax"]}
+            axisLine={false}
+            tick={{ fill: "#FFFFFF" }}
+            tickLine={false}
+          />
+          <YAxis hide={true} domain={[-10, "auto"]} />
+          <Tooltip
+            cursor={<CustomCursor />}
+            content={<CustomTooltip />}
+            contentStyle={{ backgroundColor: "#FFFFFF", color: "#000000" }}
+          />
 
-        <Line
-          type="monotone"
-          dataKey="sessionLength"
-          fill="white"
-          stroke="white"
-          dot={false}
-        />
-      </LineChart>
-    </div>
-  );
+          <Line
+            type="monotone"
+            dataKey="sessionLength"
+            fill="white"
+            stroke="white"
+            dot={false}
+          />
+        </LineChart>
+      </div>
+    );
+  }
 }
-}
-export default withParams(LineChartComponent) ;
+export default withParams(LineChartComponent);
