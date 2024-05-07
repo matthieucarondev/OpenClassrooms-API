@@ -1,11 +1,20 @@
 import "@/components/AverageSessions/AverageSessions.css";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { Component } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Rectangle } from "recharts";
 import { fetchAverageSessionsData } from "@/ApiServices/ApiServices.js";
 import { Loadingchart } from "@/components/Loading/Loading";
 import { USER_AVERAGE_SESSIONS } from "@/dataMock/Data";
+import AverageModel from "@/model/AverageModel";
+import { useParams } from "react-router-dom";
 
+
+function withParams(Component) {
+  return function WrappedComponent(props) {
+    const params = useParams();
+
+  return <Component {...props} params={params} />;
+};
+}
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const sessionLength = payload[0].value;
@@ -37,31 +46,37 @@ const CustomCursor = (props) => {
     />
   );
 };
-const LineChartComponent = () => {
-  const { userId } = useParams();
-  const [sessions, setSessions] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
+class LineChartComponent extends Component  {
+  constructor(props){
+    super(props);
+    this.state = {
+      sessions: [],
+      isLoading: true,
+    };
+    this.averageModel = new AverageModel();
+  }
+    
+  async componentDidMount() {
+    
+    const userId =  this.props.params.userId;
       try {
         // Vérifie d'abord l'API
         const averageSessionsData = await fetchAverageSessionsData(userId);
 
-        setSessions(averageSessionsData.sessions);
+        this.setState({ sessions: averageSessionsData.sessions, isLoading: false });
       } catch {
         // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock
         const userData = USER_AVERAGE_SESSIONS.find(
           (user) => user.userId === parseInt(userId)
         );
         if (userData) {
-          setSessions(userData.sessions);
+          this.setState({ sessions: userData.sessions, isLoading: false });
         }
       }
-    };
-    fetchData();
-  }, [userId]);
-
-  if (sessions.length === 0) {
+    }
+render() {
+  const { sessions, isLoading } = this.state;
+  if (isLoading || !sessions || sessions.length === 0) {
     return <Loadingchart />;
   }
 
@@ -117,5 +132,6 @@ const LineChartComponent = () => {
       </LineChart>
     </div>
   );
-};
-export default LineChartComponent;
+}
+}
+export default withParams(LineChartComponent) ;
