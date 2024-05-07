@@ -54,6 +54,7 @@ class LineChartComponent extends Component  {
       isLoading: true,
     };
     this.averageModel = new AverageModel();
+    console.log("AverageModel instance:", this.averageModel);
   }
     
   async componentDidMount() {
