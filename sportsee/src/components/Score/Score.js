@@ -4,11 +4,13 @@ import { fetchUserInfos } from '@/ApiServices/ApiServices';
 import { useParams } from 'react-router-dom';
 import { Loadingchart } from '@/components/Loading/Loading';
 import { USER_MAIN_DATA } from "@/dataMock/Data.js";
+import UserModel from '../../model/UserModel';
 
 
 const TodayScore = () => {
   const  { userId }= useParams();
   const [todayScore, setTodayScore] = useState(null);
+  const [userModel, setUserModel] = useState(null); // État pour stocker l'instance UserModel
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -16,6 +18,9 @@ const TodayScore = () => {
       let score ;
         const userInfos = await fetchUserInfos(userId);
         if(userInfos) {
+          const newUserModel = new UserModel(userId);
+          await newUserModel.initialize(userInfos);
+          setUserModel(newUserModel);
           score = parseFloat(userInfos.todayScore);
         }else {
              // En cas d'erreur lors de la récupération des données depuis l'API, utilisez les données mock

@@ -8,6 +8,7 @@ import { fetchUserInfos } from "../../ApiServices/ApiServices";
 import { useParams } from 'react-router-dom';
 import { Loadingchart } from '@/components/Loading/Loading';
 import { USER_MAIN_DATA } from "../../dataMock/Data";
+import UserModel from "../../model/UserModel";
 
 
 const iconNutri = (name) => {
@@ -32,22 +33,18 @@ const NutritionalCard = () => {
     const fetchData = async() => {
       try {
         const userInfos = await fetchUserInfos(userId);
-        if(userInfos) {
-          setUserData(userInfos.keyData);
-    }else {
-      // Si les données de l'API ne sont pas disponibles, utilisez les données mock
-      const mockUserData = USER_MAIN_DATA.find(data => data.id.toString() === userId);
-      if (mockUserData) {
-        setUserData(mockUserData.keyData);
-      }
-    }
+        const userModel = new UserModel(userId); // Instanciez votre modèle UserModel avec l'ID utilisateur
+        await userModel.initialize(userInfos); // Initialisez les données utilisateur à partir de l'API
+        setUserData(userModel); // Mettez à jour l'état avec les données utilisateur du modèle
 
   } catch (error) {
-    console.error("Error fetching user data" ,error);
-    // En cas d'erreur lors de la récupération des données de l'API, utilisez les données mock
-    const mockUserData = USER_MAIN_DATA.find(data => data.id.toString() === userId);
-    if (mockUserData) {
-      setUserData(mockUserData.keyData);
+    console.error("Error fetching user data", error);
+        // En cas d'erreur lors de la récupération des données de l'API, utilisez les données mock
+        const mockUserData = USER_MAIN_DATA.find(data => data.id.toString() === userId);
+        if (mockUserData) {
+          const userModel = new UserModel(userId); // Instanciez votre modèle UserModel avec l'ID utilisateur
+          await userModel.initialize(mockUserData); // Initialisez les données utilisateur à partir des données mock
+          setUserData(userModel); // Mettez à jour l'état avec les données utilisateur du modèle
   }
 }
 };
